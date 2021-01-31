@@ -134,6 +134,7 @@ end
 
 function demonVitalGauges.save()
   table.save(filename, demonVitalGauges.config)
+  demonVitalGauges.echo("DemonVitalGauges configuration saved!")
 end
 
 function demonVitalGauges.load()
@@ -156,6 +157,7 @@ function demonVitalGauges.load()
     end
   end
   demonVitalGauges.reconfigure()
+  demonVitalGauges.echo("DemonVitalGauges configuration loaded!")
   return true
 end
 
@@ -186,6 +188,7 @@ function demonVitalGauges.set(configString)
         if tonumber(value) then value = tonumber(value) end
         if tobool(value) ~= nil then value = tobool(value) end
         cfg[key] = value
+        demonVitalGauges.echo(string.format("Config item %s set to %s", key, tostring(value)))
       end
     end
     demonVitalGauges.reconfigure()
@@ -199,11 +202,14 @@ function demonVitalGauges.set(configString)
         if tonumber(value) then value = tonumber(value) end
         if tobool(value) ~= nil then value = tobool(value) end
         cfg[gauge][key] = value
+        local msg = string.format("Config %s.%s set to %s", gauge, key, tostring(value))
+        demonVitalGauges.echo(msg)
       end
     elseif #fields > 3 and fields[1] == "font" then
       local key = table.remove(fields, 1)
       local value = table.concat(fields, " ")
       cfg[key] = value
+      demonVitalGauges.echo(string.format("Config item %s set to %s", key, tostring(value)))
     end
     demonVitalGauges.reconfigure()
     return
