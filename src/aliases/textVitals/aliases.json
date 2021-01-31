@@ -1,0 +1,6 @@
+[
+  {
+    "name": "dvg",
+    "regex": "^dvg(?: (save|load|config|cfg)(?: (.+))?)?$"
+  }
+]
